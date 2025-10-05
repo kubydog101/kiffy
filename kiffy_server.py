@@ -11,8 +11,8 @@ class KiffyServer:
         self.port = port
         self.clients = {}
         self.starred_users = set()
-        self.admins = set()  # Множество админов
-        self.global_emoji = "📢"  # Эмодзи для глобальных сообщений
+        self.admins = set()  
+        self.global_emoji = "📢" 
         
         print("KIFFY SERVER SETUP")
         print("=" * 40)
@@ -51,7 +51,7 @@ class KiffyServer:
         return False
     
     def make_admin(self, username):
-        """Сделать пользователя админом"""
+
         if username in self.clients:
             self.admins.add(username)
             self.clients[username]['admin'] = True
@@ -59,7 +59,7 @@ class KiffyServer:
         return False
     
     def remove_admin(self, username):
-        """Убрать права админа"""
+
         if username in self.admins:
             self.admins.remove(username)
             if username in self.clients:
@@ -68,13 +68,13 @@ class KiffyServer:
         return False
     
     def send_global_message(self, from_user, message):
-        """Отправить глобальное сообщение всем пользователям"""
+
         formatted_message = f"{self.global_emoji} [GLOBAL] {from_user}: {message}"
         self.broadcast(formatted_message, None)
         return True
     
     def change_global_emoji(self, new_emoji):
-        """Изменить эмодзи для глобальных сообщений"""
+
         self.global_emoji = new_emoji
         return True
     
@@ -168,7 +168,7 @@ class KiffyServer:
                 client_socket.close()
                 return
             
-            # Проверка пароля для admin
+    
             if username == "admin":
                 client_socket.send("🔑 Admin password: ".encode('utf-8'))
                 password = client_socket.recv(1024).decode('utf-8').strip()
@@ -271,7 +271,6 @@ class KiffyServer:
                     target_user = message[11:].strip()
                     if self.make_admin(target_user):
                         client_socket.send(f"✅ {target_user} is now admin".encode('utf-8'))
-                        # Уведомляем нового админа
                         if target_user in self.clients:
                             self.clients[target_user]['socket'].send("🎉 You are now an admin! Use /help for admin commands".encode('utf-8'))
                     else:
