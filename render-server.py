@@ -19,7 +19,7 @@ class KiffyServer:
         port = int(os.environ.get('PORT', 8888))
         self.server_socket.bind((self.host, port))
         self.server_socket.listen(10)
-        print(f"🚀 Kiffy Server запущен на порту {port}")
+        print(f"🚀 Kiffy Server started on port {port}")
         
         while True:
             client_socket, addr = self.server_socket.accept()
