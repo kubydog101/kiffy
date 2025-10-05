@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiffy - Freedom to Communicate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 1rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-top: 1rem;
+        }
+        
+        .language-switcher {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+        }
+        
+        .lang-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #00ff88, #0088ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        
+        .section {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #00ff88;
+        }
+        
+        .step {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #2a2a2a;
+            border-radius: 8px;
+            border-left: 4px solid #0078d4;
+        }
+        
+        .step-number {
+            background: #0078d4;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .code-block {
+            background: #000;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        
+        .copy-btn {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+        
+        .screenshot {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 2px solid #333;
+        }
+        
+        .note {
+            background: #ff6b35;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .feature {
+            background: #2a2a2a;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-switcher">
+            <button class="lang-btn" onclick="toggleLanguage()">Русский</button>
+        </div>
+        
+        <div class="header">
+            <h1>Kiffy</h1>
+            <div class="subtitle" id="subtitle">Freedom to Communicate</div>
+        </div>
+
+        <div class="section">
+            <div class="section-title" id="about-title">About Kiffy</div>
+            <div id="about-text">
+                Kiffy is a messenger that respects your freedom. No ads, no tracking, no censorship. 
+                Just pure communication through your own server.
+            </div>
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">🚫</div>
+                    <div id="feature1">No Ads</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>
+                    <div id="feature2">Unblockable</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <div id="feature3">Fast</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title" id="tutorial-title">Android Tutorial (Termux)</div>
+            
+            <div class="step">
+                <div><span class="step-number">1</span><span id="step1-title">Install Termux</span></div>
+                <div id="step1-text">Download Termux from Google Play Store or F-Droid</div>
+            </div>
+            
+            <div class="step">
+                <div><span class="step-number">2</span><span id="step2-title">Update packages</span></div>
+                <div class="code-block" id="code1">pkg update && pkg upgrade</div>
+                <button class="copy-btn" onclick="copyCode('code1')" id="copy-btn1">Copy</button>
+            </div>
+            
+            <div class="step">
+                <div><span class="step-number">3</span><span id="step3-title">Install Python</span></div>
+                <div class="code-block" id="code2">pkg install python</div>
+                <button class="copy-btn" onclick="copyCode('code2')" id="copy-btn2">Copy</button>
+            </div>
+            
+            <div class="step">
+                <div><span class="step-number">4</span><span id="step4-title">Download Kiffy</span></div>
+                <div class="code-block" id="code3">pkg install wget && wget https://kiffy-msg.vercel.app/kiffy_client.py</div>
+                <button class="copy-btn" onclick="copyCode('code3')" id="copy-btn3">Copy</button>
+            </div>
+            
+            <div class="step">
+                <div><span class="step-number">5</span><span id="step5-title">Run Kiffy</span></div>
+                <div class="code-block" id="code4">python kiffy_client.py</div>
+                <button class="copy-btn" onclick="copyCode('code4')" id="copy-btn4">Copy</button>
+            </div>
+            
+            <div class="note" id="note">
+                💡 <strong>Note:</strong> You need a Kiffy server to connect to. Ask your friend for server IP or run your own server on PC.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title" id="commands-title">Useful Commands</div>
+            <div class="code-block" id="code5">
+# Check Python version
+python --version
+
+# Install requirements (if any)
+pip install socket threading
+
+# Run server (if you want to host)
+python kiffy_server.py
+            </div>
+            <button class="copy-btn" onclick="copyCode('code5')" id="copy-btn5">Copy</button>
+        </div>
+
+        <div class="section">
+            <div class="section-title" id="features-title">Why Kiffy on Termux?</div>
+            <div id="features-text">
+                • Works on any Android device<br>
+                • No root required<br>
+                • Free and open source<br>
+                • Your data stays with you<br>
+                • Cannot be blocked by ISPs<br>
+                • Perfect for countries with censorship
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLang = 'en';
+        
+        const translations = {
+            'en': {
+                'subtitle': 'Freedom to Communicate',
+                'about-title': 'About Kiffy',
+                'about-text': 'Kiffy is a messenger that respects your freedom. No ads, no tracking, no censorship. Just pure communication through your own server.',
+                'feature1': 'No Ads',
+                'feature2': 'Unblockable',
+                'feature3': 'Fast',
+                'tutorial-title': 'Android Tutorial (Termux)',
+                'step1-title': 'Install Termux',
+                'step1-text': 'Download Termux from Google Play Store or F-Droid',
+                'step2-title': 'Update packages',
+                'step3-title': 'Install Python',
+                'step4-title': 'Download Kiffy',
+                'step5-title': 'Run Kiffy',
+                'note': '💡 Note: You need a Kiffy server to connect to. Ask your friend for server IP or run your own server on PC.',
+                'commands-title': 'Useful Commands',
+                'features-title': 'Why Kiffy on Termux?',
+                'features-text': `• Works on any Android device<br>
+• No root required<br>
+• Free and open source<br>
+• Your data stays with you<br>
+• Cannot be blocked by ISPs<br>
+• Perfect for countries with censorship`,
+                'copy-btn1': 'Copy',
+                'copy-btn2': 'Copy',
+                'copy-btn3': 'Copy',
+                'copy-btn4': 'Copy',
+                'copy-btn5': 'Copy'
+            },
+            'ru': {
+                'subtitle': 'Свобода Общения',
+                'about-title': 'О Kiffy',
+                'about-text': 'Kiffy - мессенджер, который уважает вашу свободу. Никакой рекламы, отслеживания или цензуры. Только чистое общение через ваш собственный сервер.',
+                'feature1': 'Нет Рекламы',
+                'feature2': 'Неблокируемый',
+                'feature3': 'Быстрый',
+                'tutorial-title': 'Инструкция для Android (Termux)',
+                'step1-title': 'Установите Termux',
+                'step1-text': 'Скачайте Termux из Google Play или F-Droid',
+                'step2-title': 'Обновите пакеты',
+                'step3-title': 'Установите Python',
+                'step4-title': 'Скачайте Kiffy',
+                'step5-title': 'Запустите Kiffy',
+                'note': '💡 Примечание: Вам нужен сервер Kiffy для подключения. Спросите IP у друга или запустите свой сервер на ПК.',
+                'commands-title': 'Полезные команды',
+                'features-title': 'Почему Kiffy на Termux?',
+                'features-text': `• Работает на любом Android устройстве<br>
+• Не требует root прав<br>
+• Бесплатный и с открытым кодом<br>
+• Ваши данные остаются с вами<br>
+• Нельзя заблокировать провайдером<br>
+• Идеально для стран с цензурой`,
+                'copy-btn1': 'Копировать',
+                'copy-btn2': 'Копировать',
+                'copy-btn3': 'Копировать',
+                'copy-btn4': 'Копировать',
+                'copy-btn5': 'Копировать'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ru' : 'en';
+            document.querySelector('.lang-btn').textContent = currentLang === 'en' ? 'Русский' : 'English';
+            updateContent();
+        }
+
+        function updateContent() {
+            const langData = translations[currentLang];
+            for (const [key, value] of Object.entries(langData)) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.innerHTML = value;
+                }
+            }
+        }
+
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const text = codeElement.textContent || codeElement.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = currentLang === 'en' ? 'Copied!' : 'Скопировано!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Initialize
+        updateContent();
+    </script>
+</body>
+</html>
